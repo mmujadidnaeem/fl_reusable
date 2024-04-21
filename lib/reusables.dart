@@ -9,5 +9,5 @@ import 'package:flutter/services.dart';
 
 part './utils/app_navigation_material.dart';
 part './utils/keyboard_dismisser.dart';
-part './utils/snack_bar.dart';
+part './utils/snackbar.dart';
 part './utils/awaiter.dart';

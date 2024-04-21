@@ -1,33 +1,74 @@
-/// Library that simplifies hiding the keyboard in Flutter apps.
-///
-/// The library includes the `KeyboardDismisser` widget with optional `HideMode`
-/// to either unfocus the current `FocusScope`, or
-/// to use `SystemChannels.textInput` to hide the keyboard.
-///
-/// It also includes the `unfocus` and `hideTextInput` helper methods that can
-/// hide implementation details and make the code more expressive.
-
 part of '../../reusables.dart';
 
+
+
+class KeyboardDismisser extends StatelessWidget {
+  final Widget child;
+
+  const KeyboardDismisser({super.key, required this.child});
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        FocusScopeNode currentFocus = FocusScope.of(context);
+        if (!currentFocus.hasPrimaryFocus && currentFocus.focusedChild != null) {
+          FocusManager.instance.primaryFocus!.unfocus();
+        }
+      },
+      child: child,
+    );
+  }
+}
+
+
+
 /// How to hide the keyboard.
+///
+/// import 'package:keyboard_hider/keyboard_hider.dart';
+///
+//
+// class YourWidget extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     // When you now tap on the child, the keyboard should be dismissed.
+//     return KeyboardHider(
+//       child: Text('your widgets...'),
+//     );
+//   }
+// }
+
+//
+
+// class YourOtherWidget extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     // When you now tap on the child, the keyboard should be hidden.
+//     return KeyboardHider(
+//       mode: HideMode.hideTextInput,
+//       child: Text('your widgets...'),
+//     );
+//   }
+// }
+
 enum HideMode {
   /// Uses the context's [FocusScopeNode]'s (by calling the [FocusScope.of])
   /// unfocus method.
   ///
-  /// It causes the [KeyboardDismisser] widget to call `unfocus` function on tap.
+  /// It causes the [KeyboardHider] widget to call `unfocus` function on tap.
   unfocus,
 
   /// Uses the textInput channel used by the Flutter system, and invokes
   /// 'TextInput.hide' on it.
   ///
-  /// It causes the [KeyboardDismisser] widget to call [hideTextInput] on tap.
+  /// It causes the [KeyboardHider] widget to call [hideTextInput] on tap.
   hideTextInput,
 }
 
 /// A widget that upon tap attempts to hide the keyboard.
-class KeyboardDismisser extends StatelessWidget {
+class KeyboardHider extends StatelessWidget {
   /// Creates a widget that on tap, hides the keyboard.
-  const KeyboardDismisser({
+  const KeyboardHider({
     required this.child,
     this.mode = HideMode.unfocus,
     super.key,
@@ -60,14 +101,14 @@ class KeyboardDismisser extends StatelessWidget {
 
 /// Hide keyboard by un-focusing the current context's [FocusScopeNode].
 ///
-/// Used by the [KeyboardDismisser] widget if the hide mode is set to
+/// Used by the [KeyboardHider] widget if the hide mode is set to
 /// [HideMode.unfocus] (default behavior).
 void unfocus(BuildContext context) => FocusScope.of(context).unfocus();
 
 /// Hide keyboard by invoking the "TextInput.hide" method on
 /// [SystemChannels.textInput].
 ///
-/// Used by the [KeyboardDismisser] widget if the hide mode is set to
+/// Used by the [KeyboardHider] widget if the hide mode is set to
 /// [HideMode.hideTextInput].
 ///
 /// This function hides the keyboard, but it will not unfocus the
