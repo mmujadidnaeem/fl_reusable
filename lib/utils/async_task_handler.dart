@@ -1,4 +1,4 @@
-part of '../../reusables.dart';
+part of '../../fl_reusable.dart';
 
 /// An abstract class that provides a mechanism to handle asynchronous operations
 /// with custom behaviors before and after the operation.

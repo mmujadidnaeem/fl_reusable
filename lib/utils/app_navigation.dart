@@ -1,4 +1,4 @@
-part of '../../reusables.dart';
+part of '../../fl_reusable.dart';
 
 class AppNavigation {
   static final navigatorKey = GlobalKey<NavigatorState>();

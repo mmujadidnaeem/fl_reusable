@@ -1,4 +1,4 @@
-part of '../../reusables.dart';
+part of '../../fl_reusable.dart';
 
 
 /// A mixin to ease the use of [Form] in a [StatefulWidget].

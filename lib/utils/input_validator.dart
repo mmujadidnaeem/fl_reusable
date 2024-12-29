@@ -1,4 +1,4 @@
-part of '../../reusables.dart';
+part of '../../fl_reusable.dart';
 /// A utility class that contains implementations of some common validators.
 abstract class InputValidator {
   static final _emailRegExp = RegExp(
