@@ -2,10 +2,10 @@ part of '../../reusables.dart';
 
 
 
-class KeyboardDismisser extends StatelessWidget {
+class DismissKeyboard extends StatelessWidget {
   final Widget child;
 
-  const KeyboardDismisser({super.key, required this.child});
+  const DismissKeyboard({super.key, required this.child});
 
   @override
   Widget build(BuildContext context) {
